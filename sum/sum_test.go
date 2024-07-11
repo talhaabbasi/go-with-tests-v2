@@ -28,3 +28,14 @@ func TestSumAllTails(t *testing.T) {
 		}
 	})
 }
+
+func TestSumAllHeads(t *testing.T) {
+	t.Run("collection of any size", func(t *testing.T) {
+		got := SumAllHeads([]int{1,2,3}, []int{0, 9})
+		want := []int{1, 0}
+
+		if !slices.Equal(got, want) {
+			t.Errorf("got %v but want %v", got, want)
+		}
+	})
+}
