@@ -1,6 +1,7 @@
 package sum
 
 import (
+	"fmt"
 	"slices"
 	"testing"
 )
@@ -16,6 +17,18 @@ func TestSum(t *testing.T) {
 			t.Errorf("got %d but want %d, %v", got, want, numbers)
 		}
 	})
+}
+
+func ExampleSum() {
+	sum := Sum([]int{1,2,3})
+	fmt.Println(sum)
+	// Output: 6
+}
+
+func BenchmarkSum(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Sum([]int{1,2,3})
+	}
 }
 
 func TestSumAllTails(t *testing.T) {
@@ -40,6 +53,18 @@ func TestSumAllTails(t *testing.T) {
 	})
 }
 
+func ExampleSumAllTails() {
+	sum := SumAllTails([]int{1,2,3})
+	fmt.Println(sum)
+	// Output: [5]
+}
+
+func BenchmarkSumAllTails(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Sum([]int{1,2,3})
+	}
+}
+
 func TestSumAllHeads(t *testing.T) {
 	t.Run("collection of any size", func(t *testing.T) {
 		got := SumAllHeads([]int{1,2,3}, []int{0, 9})
@@ -49,4 +74,16 @@ func TestSumAllHeads(t *testing.T) {
 			t.Errorf("got %v but want %v", got, want)
 		}
 	})
+}
+
+func ExampleSumAllHeads() {
+	sum := SumAllHeads([]int{1,2,3})
+	fmt.Println(sum)
+	// Output: [1]
+}
+
+func BenchmarkSumAllHeads(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Sum([]int{1,2,3})
+	}
 }
