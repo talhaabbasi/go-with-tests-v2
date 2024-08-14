@@ -1,8 +1,9 @@
 package dictionary
 
 const (
-	ErrNotFound   = DictionaryErr("could not find the word you were looking for")
-	ErrWordExists = DictionaryErr("word already exists")
+	ErrNotFound         = DictionaryErr("could not find the word you were looking for")
+	ErrWordExists       = DictionaryErr("word already exists")
+	ErrWordDoesNotExist = DictionaryErr("word does not exist")
 )
 
 type DictionaryErr string
@@ -33,4 +34,22 @@ func (d Dictionary) Add(key, element string) error {
 		return err
 	}
 	return nil
+}
+
+func (d Dictionary) Update(key, element string) error {
+	_, err := d.Search(key)
+
+	switch err {
+	case ErrNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		d[key] = element
+	default:
+		return err
+	}
+	return nil
+}
+
+func (d Dictionary) Delete(key string) {
+	delete(d, key)
 }
